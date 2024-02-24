@@ -1,0 +1,10 @@
+{
+	frankenphp {
+		num_threads 1
+		worker {
+			file ./public/frankenphp.php
+			num 1
+			env APP_RUNTIME Runtime\\FrankenPhpSymfony\\Runtime
+		}
+	}
+}
