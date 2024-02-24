@@ -103,6 +103,6 @@ And the same test requests:
 
 And the results are similar to the Swoole ones.
 
-## Root case
+## Root cause
 
 The simplified explanation is that PHP runtime uses [Shared-nothing architecture](https://en.wikipedia.org/wiki/Shared-nothing_architecture) by running the garbage collector to clear the memory between the requests. So memory is cleared after the previous request is completed and before the next one starts. But Swoole and RoarRunner runtimes are using [Shared memory model](https://en.wikipedia.org/wiki/Shared_memory) which gives it its power. In this case, the memory is shared between different requests handled by the same worker. Please note, single-worker configuration have been used for all runtimes to simplify showcasing the problem.  You can find more details in [RoarRunner documentation](https://roadrunner.dev/docs/app-server-production/2.x/en#state-and-memory).
