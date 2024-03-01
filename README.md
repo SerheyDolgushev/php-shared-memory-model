@@ -73,8 +73,7 @@ As expected, each response returns `1`. Nothing strange here.
 
 Try to perform the same steps by running the Swoole runtime:
 ```bash
-APP_RUNTIME=Runtime\\Swoole\\Runtime \
-    php -d extension=swoole.so public/swoole.php
+APP_RUNTIME=Runtime\\Swoole\\Runtime php -d extension=swoole.so public/swoole.php
 ```
 
 And sending the same test requests:
@@ -114,13 +113,12 @@ Let's use FrankenPHP to test:
 
 ```bash
 cd ./public
-APP_RUNTIME=Runtime\\FrankenPhpSymfony\\Runtime \
-    ~/frankenphp php-server -l 127.0.0.1:8000 -w ./index.php,1
+APP_RUNTIME=Runtime\\FrankenPhpSymfony\\Runtime ~/frankenphp php-server -l 127.0.0.1:8000 -w ./index.php,1
 ```
 
 And again the same test requests:
 ```bash
-% curl http://127.0.0.1:8000/testq
+% curl http://127.0.0.1:8000/test
 [2024-03-01T08:35:40+00:00] Counter: 1
 % curl http://127.0.0.1:8000/test
 [2024-03-01T08:35:41+00:00] Counter: 2
