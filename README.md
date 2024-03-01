@@ -43,6 +43,10 @@ brew install roadrunner
 
 Otherwise, please follow [RoadRunner Installation guide](https://docs.roadrunner.dev/general/install).
 
+### FrankenPHP
+
+Follow the official instructions to download [Standalone Binary](https://frankenphp.dev/docs/#standalone-binary), and please save it to `~/frankenphp`.
+
 ## Problem
 
 First of all, have a glance at [TestController](https://github.com/SerheyDolgushev/php-shared-memory-model/blob/main/src/Controller/TestController.php). It has the only `testAction` method that returns the date and increased value of the `counter` property.
@@ -69,7 +73,8 @@ As expected, each response returns `1`. Nothing strange here.
 
 Try to perform the same steps by running the Swoole runtime:
 ```bash
-APP_RUNTIME=Runtime\\Swoole\\Runtime php -d extension=swoole.so public/swoole.php
+APP_RUNTIME=Runtime\\Swoole\\Runtime \
+    php -d extension=swoole.so public/swoole.php
 ```
 
 And sending the same test requests:
@@ -102,6 +107,26 @@ And the same test requests:
 ```
 
 And the results are similar to the Swoole ones.
+
+### FrankenPHP
+
+Let's use FrankenPHP to test:
+
+```bash
+cd ./public
+APP_RUNTIME=Runtime\\FrankenPhpSymfony\\Runtime \
+    ~/frankenphp php-server -l 127.0.0.1:8000 -w ./index.php,1
+```
+
+And again the same test requests:
+```bash
+% curl http://127.0.0.1:8000/testq
+[2024-03-01T08:35:40+00:00] Counter: 1
+% curl http://127.0.0.1:8000/test
+[2024-03-01T08:35:41+00:00] Counter: 2
+% curl http://127.0.0.1:8000/test
+[2024-03-01T08:35:42+00:00] Counter: 3
+```
 
 ## Root cause
 

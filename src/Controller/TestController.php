@@ -16,7 +16,7 @@ class TestController extends AbstractController
     #[Route(path: '/test', name: 'test', methods: [Request::METHOD_GET])]
     public function testAction(): Response
     {
-        $content = '['.\date('c').'] Counter: '.(++$this->counter) . PHP_EOL;
+        $content = '['.\date('c').'] Counter: '.(++$this->counter).PHP_EOL;
 
         return new Response($content, Response::HTTP_OK, ['Content-Type' => 'text/html']);
     }
